@@ -4,7 +4,7 @@
 
 const Sequelize = require('sequelize');
 const config = require('config');
-
+mysql = require('mysql2');
 const host = config.get('dbConfig.mysql.host');
 const database = config.get('dbConfig.mysql.database');
 const username = config.get('dbConfig.mysql.username');

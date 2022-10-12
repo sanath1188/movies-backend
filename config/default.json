@@ -2,9 +2,9 @@
   "port": 9000,
   "dbConfig": {
 		"mysql": {
-			"host"    : "localhost",
+			"host"    : "ec2-65-2-146-174.ap-south-1.compute.amazonaws.com",
 			"database": "movies",
-			"username": "root",
+			"username": "test",
 			"password": "Sanath@1188",
 			"pool": {
 				"min": 5,

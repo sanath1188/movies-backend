@@ -15,7 +15,7 @@ let app = express();
 
 app.use(compression())
 
-app.set("port", port || 8080);
+app.set("port", process.env.PORT || 5000);
 
 app.use(useragent.express());
 app.use(bodyParser.json({ limit: "2048mb" }));

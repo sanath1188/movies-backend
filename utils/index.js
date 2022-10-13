@@ -9,6 +9,9 @@ const jwt = require('jsonwebtoken');
  */
 const generateJWTToken = (userId) => {
   let promise = new Promise(async (resolve, reject) => {
+    /** Can also add a timestamp that autoexpires after a few minutes/hours/days.
+     * Just keeping it simple for now.
+     */
     jwt.sign(userId.toString(), secretKey, (err, token) => {
       if (err) {
         reject(err);

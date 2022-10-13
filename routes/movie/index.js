@@ -7,6 +7,7 @@ const { verifyToken, validateMovieRequest } = require('../../middleware');
 const { movieSvc } = require("../../services");
 const router = require("express").Router();
 
+/** Route that fetches the list of all movies linked to the user. */
 router.get('/', verifyToken, async (req, res) => {
   let [moviesErr, movies] = await to(movieSvc.findMovie({user_id: req.userId}, true, 'findAll', ['id', 'name', 'genre', 'cast', 'rating', 'release_date']));
 
@@ -23,6 +24,7 @@ router.get('/', verifyToken, async (req, res) => {
   })
 })
 
+/** Route that updates a movie. */
 router.put('/', [verifyToken, validateMovieRequest], async (req, res) => {
   let [moviesErr, movies] = await to(movieSvc.updateMovie(req.body.id, {
     name: req.body.name,
@@ -44,6 +46,7 @@ router.put('/', [verifyToken, validateMovieRequest], async (req, res) => {
   })
 })
 
+/** Route that deletes a movie. */
 router.delete('/', verifyToken, async(req, res) => {
   let [movieErr, movie] = await to(movieSvc.deleteMovie({id: req.body.id}));
 
@@ -59,6 +62,7 @@ router.delete('/', verifyToken, async(req, res) => {
   })
 })
 
+/** Route that creates a movie. */
 router.post('/create', [verifyToken, validateMovieRequest], async (req, res) => {
   const {name, rating, cast, genre, releaseDate} = req.body;
   let [createdMovieErr, createdMovie] = await to(movieSvc.createMovie({name, rating, cast, genre, release_date: releaseDate, user_id: req.userId}));

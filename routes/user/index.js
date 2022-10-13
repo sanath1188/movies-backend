@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt-nodejs');
 const { generateJWTToken } = require('../../utils');
 const { verifyToken } = require('../../middleware');
 
+/** Route that registers a user. */
 router.post("/register", async function (req, res) {
   let { firstName, lastName, email, password } = req.body;
 
@@ -26,6 +27,7 @@ router.post("/register", async function (req, res) {
   })
 });
 
+/** Route that logs a user in. */
 router.post("/login", async function (req, res) {
   let email = req.body.email;
   let password = req.body.password;
@@ -66,6 +68,7 @@ router.post("/login", async function (req, res) {
 
 });
 
+/** Route that fetches user data. */
 router.get('/me', verifyToken, async (req, res) => {
   let [userErr, user] = await to(userSvc.findUser({id: req.userId }, true, 'findOne', ['first_name', 'last_name']));
 

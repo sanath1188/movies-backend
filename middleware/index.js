@@ -2,6 +2,13 @@ const config = require("config");
 const secretKey = config.get("jwt.secretKey");
 const jwt = require('jsonwebtoken');
 
+/**
+ * A middleware that validates if the user is authenticated.
+ * @param {*} req - request of the API.
+ * @param {*} res - response object.
+ * @param {*} next - enables next steps if the middleware succeeds.
+ * @returns - error response/attaches user data to the request.
+ */
 const verifyToken = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers["x-access-token"];
   
@@ -25,6 +32,13 @@ const verifyToken = (req, res, next) => {
   });
 }
 
+/**
+ * Middleware that ensures the movie object is organized correctly in the body.
+ * @param {*} req - request of the API.
+ * @param {*} res - response object.
+ * @param {*} next - enables next steps if the middleware succeeds.
+ * @returns - error response/attaches altered body to the request.
+ */
 const validateMovieRequest = (req, res, next) => {
   let {name, genre, rating, cast, releaseDate} = req. body;
   if(!name || !rating || !cast || !genre || !releaseDate) {
